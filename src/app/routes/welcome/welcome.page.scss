@@ -1,0 +1,23 @@
+app-welcome {
+    ion-toolbar {
+      --background: transparent;
+      --border-color: transparent;
+    }
+    .fixed-bottom{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 0;
+    }
+    ion-slides{
+      height: 100%;
+    }
+ 
+    .ion-align-items-start{
+
+      margin:auto;
+
+    }
+  }
+ 
