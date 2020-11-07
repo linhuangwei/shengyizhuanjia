@@ -8,4 +8,7 @@ export interface Product {
     images: string[];
     price: number; // 售价
     purchasePrice: number; // 进价
+    inventory: number; // 库存
+    standard: string; // 规格
+    remark: string;
 }

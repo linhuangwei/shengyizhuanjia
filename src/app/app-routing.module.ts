@@ -61,23 +61,27 @@ const routes: Routes = [
   },
   {
     path: 'category-list',
-    loadChildren: () => import('./routes/category-list/category-list.module').then( m => m.CategoryListPageModule)
+    loadChildren: () => import('./routes/category/category-list/category-list.module').then( m => m.CategoryListPageModule)
   },
   {
     path: 'category-edit/:id',
-    loadChildren: () => import('./routes/category-edit/category-edit.module').then( m => m.CategoryEditPageModule)
+    loadChildren: () => import('./routes/category/category-edit/category-edit.module').then( m => m.CategoryEditPageModule)
   },
   {
     path: 'category-name-edit',
-    loadChildren: () => import('./routes/category-name-edit/category-name-edit.module').then( m => m.CategoryNameEditPageModule)
+    loadChildren: () => import('./routes/category/category-name-edit/category-name-edit.module').then( m => m.CategoryNameEditPageModule)
   },
   {
     path: 'category-add',
-    loadChildren: () => import('./routes/category-add/category-add.module').then( m => m.CategoryAddPageModule)
+    loadChildren: () => import('./routes/category/category-add/category-add.module').then( m => m.CategoryAddPageModule)
   },
   {
     path: 'add-product',
-    loadChildren: () => import('./routes/add-product/add-product.module').then( m => m.AddProductPageModule)
+    loadChildren: () => import('./routes/product/add-product/add-product.module').then( m => m.AddProductPageModule)
+  },
+  {
+    path: 'product-list',
+    loadChildren: () => import('./routes/product/product-list/product-list.module').then( m => m.ProductListPageModule)
   },
 
 ];

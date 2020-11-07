@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Category } from '../../shared/category';
-import { CategoryListService } from '../../shared/services/category.service';
+import { Category } from '../../../shared/class/category';
+import { CategoryListService } from '../../../shared/services/category.service';
 
 @Component({
   selector: 'app-category-add',

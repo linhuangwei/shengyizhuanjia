@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { AjaxResult } from '../class/ajax-result';
-import { Product } from '../product';
+import { Product } from '../class/product';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ProductService {
 
 
   async insert(input: Product): Promise<AjaxResult>  {
-    input.id = UUID.UUID(); 
+    input.id = UUID.UUID();
     const res = this.localStorageService.get('product', []);
     res.push(input);
     this.localStorageService.set('product', res);
@@ -90,11 +90,11 @@ export class ProductService {
  
   async getList(index: number, size: number): Promise<AjaxResult> {
     if (index < 0) {
-     
+     // 实际开发中应抛出异常类对象
       throw new Error('分页的索引应大于等于零');
     }
     if (size <= 0) {
- 
+     // 实际开发中应抛出异常类对象
       throw new Error('每页显示的记录数应大于零');
     }
     let tmp = this.localStorageService.get('product', []);
@@ -119,7 +119,9 @@ export class ProductService {
       images: [],
       price: null, // 售价
       purchasePrice: null, // 进价
-
+      inventory: null, // 库存
+      standard: null, // 规格
+      remark: null
     };
   }
 

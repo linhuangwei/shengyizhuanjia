@@ -1,12 +1,12 @@
 
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActionSheetController, NavController, AlertController, ModalController } from '@ionic/angular';
+import { ActionSheetController, NavController, AlertController, ModalController, MenuController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Product } from '../../shared/product';
-import { CategoryListService } from '../../shared/services/category.service';
-import { ProductService } from '../../shared/services/product.service';
-
+import { Product } from '../../../shared/class/product';
+import { CategoryListService } from '../../../shared/services/category.service';
+import { ProductService } from '../../../shared/services/product.service';
+// import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-add-product',
@@ -20,15 +20,16 @@ export class AddProductPage implements OnInit, OnDestroy {
 
   subscription: Subscription;
   product: Product;
-  constructor(private actionSheetCtrl: ActionSheetController, 
+  constructor(private actionSheetCtrl: ActionSheetController,
               private productService: ProductService,
               private navCtrl: NavController,
+              private menuController: MenuController,
           //    private camera: Camera,
               private categoryService: CategoryListService,
               private alertCtrl: AlertController,
               private modalCtrl: ModalController,
               private zone: NgZone,
-            //  private barcodeScanner: BarcodeScanner,
+          //    private barcodeScanner: BarcodeScanner,
           //    private imagePicker: ImagePicker,
               private router: Router) {
     this.product = this.initProduct();
@@ -50,7 +51,7 @@ export class AddProductPage implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
-  
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -100,9 +101,9 @@ export class AddProductPage implements OnInit, OnDestroy {
         if (ct) {
           this.product = this.initProduct();
           this.product.categoryName = '默认分类';
-    
+
         } else {
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/product-list');
         }
       } else {
         const alert = await this.alertCtrl.create({
@@ -116,11 +117,6 @@ export class AddProductPage implements OnInit, OnDestroy {
   }
 
 
-
-
-  /**
-   * 扫描条码
-   */
   // onScan() {
   //   this.barcodeScanner.scan().then(barcodeData => {
   //     console.log('Barcode data', barcodeData);
@@ -188,7 +184,19 @@ export class AddProductPage implements OnInit, OnDestroy {
       barcode: '', // 条码
       images: [],
       price: null, // 售价
-      purchasePrice: null // 进价
+      purchasePrice: null, // 进价
+      inventory: null, // 库存
+      standard: null, // 规格
+      remark: null
     };
   }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+  }
+
+  ionViewDidLeave() {
+    this.menuController.enable(true);
+  }
 }
+

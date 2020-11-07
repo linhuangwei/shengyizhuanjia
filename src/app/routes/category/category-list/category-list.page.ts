@@ -2,8 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ActionSheetController, MenuController} from '@ionic/angular';
-import { Category } from '../../shared/category';
-import { CategoryListService } from '../../shared/services/category.service';
+import { Category } from '../../../shared/class/category';
+import { CategoryListService } from '../../../shared/services/category.service';
 
 @Component({
   selector: 'app-category-list',

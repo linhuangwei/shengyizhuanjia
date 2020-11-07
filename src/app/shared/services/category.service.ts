@@ -1,10 +1,10 @@
 import { LocalStorageService } from './../../shared/services/local-storage.service';
-import { CATEGORIES } from '../mock.categories';
+import { CATEGORIES } from '../class/mock.categories';
 import { Injectable } from '@angular/core';
 import { AjaxResult } from '../../shared/class/ajax-result';
-import { Category } from '../category';
+import { Category } from '../class/category';
 import { Observable, Subject } from 'rxjs';
-import { ActiveCategory } from '../ActiveCategory';
+import { ActiveCategory } from '../class/ActiveCategory';
 
 @Injectable({
   providedIn: 'root',

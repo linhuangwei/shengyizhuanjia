@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, IonItemSliding, ModalController, NavController, ToastController } from '@ionic/angular';
-import { Category } from '../../shared/category';
-import { CategoryListService } from '../../shared/services/category.service';
+import { Category } from '../../../shared/class/category';
+import { CategoryListService } from '../../../shared/services/category.service';
 import { CategoryNameEditPage } from '../category-name-edit/category-name-edit.page';
 
 @Component({

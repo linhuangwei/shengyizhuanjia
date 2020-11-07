@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
       {'href': '/home', 'name': 'a_note', 'text': '支出管理', 'disable': false}
     ],
     [
-      {'href': '/category-list', 'name': 'sales_management', 'text': '商品管理', 'disable': false},
+      {'href': '/product-list', 'name': 'sales_management', 'text': '商品管理', 'disable': false},
       {'href': '/home', 'name': 'user_management', 'text': '会员管理', 'disable': false},
       {'href': '/home', 'name': 'shop_management', 'text': '查询销售', 'disable': false},
       {'href': '/home', 'name': 'analysis', 'text': '智能分析', 'disable': false}
@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
     [
       {'href': '/home', 'name': 'gongying_more', 'text': '供应商管理', 'disable': false},
       {'href': '/home', 'name': 'guandan_more', 'text': '挂单', 'disable': false},
-      {'href': '/home', 'name': 'image_addsales', 'text': '高级功能', 'disable': false},
+      {'href': '/category-list', 'name': 'image_addsales', 'text': '高级功能', 'disable': false},
       {'disable': true}
     ]
   ];
