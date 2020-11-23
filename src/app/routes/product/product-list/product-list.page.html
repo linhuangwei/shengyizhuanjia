@@ -2,10 +2,14 @@
   <ion-toolbar color="primary">
     <ion-buttons>
       <ion-back-button text="返回" defaultHref="home" style="font-size: 20px;"></ion-back-button>
-      <ion-title align="center" style="font-size: 20px;margin-right: 80px;">
+      <ion-title align="center" style="font-size: 20px;margin-right: 40px;">
         商品管理
       </ion-title>
+      <ion-button (click)="gotoCategyList()" >
+        <ion-text  style="font-size: 20px;">分类</ion-text></ion-button>
     </ion-buttons>
+
+    
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +17,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
     <ion-refresher-content
             pullingIcon="arrow-dropdown"
-            pullingText="下拉可以刷新"
+            pullingText="下拉刷新"
             refreshingSpinner="circles"
             refreshingText="正在加载...">
     </ion-refresher-content>
@@ -24,11 +28,11 @@
     
     <ion-button type="button" expand="block" color="primary" href="/add-product">新增商品</ion-button>
   </ion-grid>
+  
   <ion-grid *ngIf="total">
     <ion-toolbar >
-      <ion-searchbar  placeholder="请输入商品名称、拼音、数字"
+      <ion-searchbar placeholder="请输入商品名称、拼音、数字"
                      [(ngModel)]="queryTerm"
-                     showCancelButton="false"
                      (ionInput)="onInput($event)" >
       </ion-searchbar>
       <ion-buttons slot="end">
@@ -36,22 +40,33 @@
       </ion-buttons>
     </ion-toolbar>
     <ion-item>
-      <ion-text>总正库存{{total}}件，总成本{{price | number:'1.2-2'}}元</ion-text>
+      <ion-text>总库存 {{inventory}} 件，总成本 {{price | number:'1.2-2'}} 元</ion-text>
+      <ion-buttons slot="end">
+        <ion-button routerLink="/add-product" >
+          <ion-icon name='notifications-outline' color="primary" style="font-size: 30px;"></ion-icon>
+          <ion-icon name='add' color="primary" style="font-size: 30px;"></ion-icon>
+         
+        </ion-button>
+      </ion-buttons>
     </ion-item>
-    <ion-item *ngFor="let p of products" detail [routerLink]="['/productDetails', p.barcode]">
+    
+    <ion-item *ngFor="let p of products" detail [routerLink]="['/product-details', p.barcode]">
       <ion-col size="2">
-        <img src="assets\img\c_goodspicture.png">
+        <!-- <img src="assets\img\c_goodspicture.png"> -->
+        <img *ngIf="p.images.length == 0" src="assets\img\c_goodspicture.png">
+        <img *ngIf="p.images.length != 0" src={{p.images[0]}}>
+        
       </ion-col>
       <ion-col size="9">
         <ion-row><ion-text>{{p.name}}</ion-text></ion-row>
         <ion-row><ion-text color="primary">￥{{p.price}}</ion-text></ion-row>
         <ion-row>
           <ion-text color="medium">条码：{{p.barcode}} </ion-text>
-          <ion-text>库存：{{p.inventory}} </ion-text>
+          <ion-text style="padding-left: 20px;">库存：{{p.inventory}} </ion-text>
         </ion-row>
       </ion-col>
       <ion-col size="1">
-        <ion-icon name="share-alt"></ion-icon>
+        <ion-icon name='share-social-outline' color="primary" style="font-size: 30px;"></ion-icon>
       </ion-col>
     </ion-item>
   </ion-grid>

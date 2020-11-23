@@ -30,9 +30,9 @@ export class HomePage implements OnInit {
       {'href': '/home', 'name': 'analysis', 'text': '智能分析', 'disable': false}
     ],
     [
-      {'href': '/home', 'name': 'gongying_more', 'text': '供应商管理', 'disable': false},
+      {'href': '/category-list', 'name': 'gongying_more', 'text': '商品分类', 'disable': false},
       {'href': '/home', 'name': 'guandan_more', 'text': '挂单', 'disable': false},
-      {'href': '/category-list', 'name': 'image_addsales', 'text': '高级功能', 'disable': false},
+      {'href': '/home', 'name': 'image_addsales', 'text': '高级功能', 'disable': false},
       {'disable': true}
     ]
   ];

@@ -13,16 +13,8 @@ import { UserService } from '../../../shared/services/user.service';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  submited: boolean;
-  codelock: boolean;
-  shopNameOk = true;
-  emailOk = true;
-	passwordOk = true;
-  confirmPasswordOk = true;
-  signup: Signup;
-
-  slideIndex = 0;
   constructor(
+      private authenticationCode: AuthenticationCodeService,
       private Acs: AuthenticationCodeService,
       private storage: LocalStorageService,
       private router: Router,
@@ -42,8 +34,33 @@ export class SignupPage implements OnInit {
       };
       this.codelock = false;
     }
+  submited: boolean;
+  codelock: boolean;
+  shopNameOk = true;
+  emailOk = true;
+	passwordOk = true;
+  confirmPasswordOk = true;
+  signup: Signup;
+
+  slideIndex = 0;
 
   @ViewChild('signupSlides', {static: true}) signupSlides: IonSlides;
+
+  verifyCode: any = {
+    verifyCodeTips: '获取验证码',
+    code : '',
+    codeLength: 4,
+    countdown: 60,
+    disable: true,
+    fail: false// 验证失败
+  };
+
+  params: any = {
+    checkInformationResult: false
+};
+
+  code_test = '';
+
   // 字符串'signupSlides'和模板中的#signupSlides引用变量的名称一致
   ngOnInit() {
      this.signupSlides.lockSwipeToNext(true);
@@ -75,21 +92,42 @@ export class SignupPage implements OnInit {
         this.onNext();
       }
   }
+  
+  settime() {
+    if (this.verifyCode.countdown === 1) {
+        this.verifyCode.countdown = 60;
+        this.verifyCode.verifyCodeTips = '重新获取';
+        this.verifyCode.disable = true;
+        return;
+    } else {
+        this.verifyCode.countdown--;
+    }
 
-
-  onSendSMS(){
-      this.signup.code = this.Acs.createCode(4);
-      this.codelock = true;
+    this.verifyCode.verifyCodeTips = '重新获取(' + this.verifyCode.countdown + ')';
+    setTimeout(() => {
+        this.verifyCode.verifyCodeTips = '重新获取(' + this.verifyCode.countdown + ')';
+        this.settime();
+    }, 1000);
   }
 
-  onValidateCode(form: NgForm){
-      if (form.valid) {
-        if (this.Acs.validate(this.signup.code)){
-          // 已通过短信验证
-          this.onNext();
-        }
-      }
+  getCode() {
+    // 获取验证码
+    this.code_test = this.authenticationCode.createCode(this.verifyCode.codeLength);
+    console.log('验证码：' + this.code_test);
+    this.verifyCode.disable = false;
+    this.settime();
   }
+
+  checkCode() {
+    console.log(this.verifyCode.code);
+    console.log(this.code_test);
+    if (this.code_test == this.verifyCode.code) {
+      this.verifyCode.fail = false;
+      this.onNext();
+    } else {
+        this.verifyCode.fail = true;
+    }
+ }
 
   async onInputMes(event) {
       if (this.shopNameOk && this.emailOk && this.passwordOk && this.confirmPasswordOk) {

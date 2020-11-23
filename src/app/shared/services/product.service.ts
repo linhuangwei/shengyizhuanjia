@@ -1,3 +1,4 @@
+import { Category } from './../class/category';
 import { Injectable } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { AjaxResult } from '../class/ajax-result';
@@ -45,6 +46,8 @@ export class ProductService {
     };
   }
 
+
+
   autoIncrement(array: Product[]): string {
     if (array.length === 0) { return ''; }
     const new_id = array[length - 1].id + 1;
@@ -62,19 +65,25 @@ export class ProductService {
     };
   }
 
-
-  getProductByBarcode(barcode: string): Product {
-    const products = this.localStorageService.get('product', []);
-    let res = this.initProduct();
-    for (const p of products) {
-      if (p.barcode == barcode) {
-        res = p;
-        break;
+  async getListByCategoryName(index: number, size: 10, categoryName: any): Promise<AjaxResult> {
+    const productlist = this.localStorageService.get('product', []);
+    let tmp = [];
+    for (const p of productlist) {
+      if (p.categoryName == categoryName) {
+        tmp.push(p);
       }
     }
-    return res;
+    const total = tmp.length;
+    tmp = tmp.slice((index - 1) * size, index * size);
+    return {
+      targetUrl: '',
+      result: tmp,
+      success: true,
+      error: null,
+      unAuthorizedRequest: false,
+    };
   }
-
+  
   modefyProduct(product: Product): boolean {
     const products = this.localStorageService.get('product', []);
     for (let i = 0; i < products.length; i++) {
@@ -123,6 +132,18 @@ export class ProductService {
       standard: null, // 规格
       remark: null
     };
+  }
+
+  getProductByBarcode(barcode: string): Product {
+    const products = this.localStorageService.get('product', []);
+    let res = this.initProduct();
+    for (const p of products) {
+      if (p.barcode == barcode) {
+        res = p;
+        break;
+      }
+    }
+    return res;
   }
 
  

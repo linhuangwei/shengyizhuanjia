@@ -12,11 +12,13 @@ export class SettingServiceService {
   public TAccount: any;
   public TShop: any;
   public APP: any;
+  version: any;
   constructor(private localStorageService: LocalStorageService) {}
   load() {
     this.TUser = this.localStorageService.get(Users, null);
     this.TAccount = this.localStorageService.get(LoginLogs, null);
     this.TShop = this.localStorageService.get(Shops, null);
     this.APP = this.localStorageService.get(APP_KEY, null);
+    this.version = this.APP.version;
   }
 }

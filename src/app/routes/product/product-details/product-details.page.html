@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button text="商品列表" defaultHref="product-list" style="font-size: 20px;"></ion-back-button>
+      <ion-title align="center" style="font-size: 20px;margin-right: 60px;">
+        商品详情
+      </ion-title>
+    </ion-buttons>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="onPresentPopover($event)">
+          <ion-icon name="ellipsis-vertical"></ion-icon></ion-button>
+      </ion-buttons>
+
+      
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content non-padding>
+  <form>
+    <ion-list>
+      <ion-item-divider style="padding: 3% 5% 3% 5%;">
+        <ion-thumbnail *ngFor="let p of product.images">
+          <img src={{p}}>
+        </ion-thumbnail>
+        <ion-text *ngIf="product.images.length == 0">无图片</ion-text>
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>名称</ion-label>
+        <ion-text>{{product.name}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>分类</ion-label>
+        <ion-text>{{product.categoryName}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>条码</ion-label>
+        <ion-text>{{product.barcode}}</ion-text>
+      </ion-item>
+      <ion-item-divider>
+
+      </ion-item-divider>
+      <ion-item>
+        <ion-label>进价</ion-label>
+        <ion-text *ngIf="seePrice === true">{{product.purchasePrice}}</ion-text>
+        <ion-button slot="end" *ngIf="seePrice === false" (click)="checkUser()"
+          size="small" color="primary">查看进价</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>售价</ion-label>
+        <ion-text>￥{{product.price | number:'1.2-2'}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>规格</ion-label>
+        <ion-text>{{product.standard}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>库存</ion-label>
+        <ion-text>{{product.inventory}}</ion-text>
+      </ion-item>
+    </ion-list>
+  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" color="primary" (click)="goToInventoryPage()">
+          出/入库
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" color="primary" (click)="onPresentActionSheet()">分享</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

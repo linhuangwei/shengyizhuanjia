@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { LocalStorageService } from '../../shared/services/local-storage.service';
 import { APP_KEY } from '../welcome/welcome.page';
+import { SettingServiceService } from './setting.service';
 
 @Component({
   selector: 'app-setting',
@@ -10,8 +11,10 @@ import { APP_KEY } from '../welcome/welcome.page';
   styleUrls: ['./setting.page.scss'],
 })
 export class SettingPage implements OnInit {
+  version: any;
 
   constructor(
+    private settingService: SettingServiceService,
     private localStorageService: LocalStorageService,
     private router: Router,
     private alertController: AlertController
@@ -23,7 +26,10 @@ export class SettingPage implements OnInit {
   onCall(phoneNumber) {
     window.location.href = 'tel:' + phoneNumber;
   }
-
+  ionViewWillEnter() {
+    this.settingService.load(); //读配置
+    this.version = this.settingService.APP.version; //版本号
+  }
 
   onLogout() {
     this.localStorageService.remove("LoginLog");
@@ -31,7 +37,7 @@ export class SettingPage implements OnInit {
     const appConfig: any = this.localStorageService.get(APP_KEY, {
       isLaunched: false,
       isLogin: false,
-      version: '1.0.0'
+      version: '0.5.9'
     });
     appConfig.isLogin = false;
     this.localStorageService.set(APP_KEY, appConfig);

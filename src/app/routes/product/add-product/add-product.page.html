@@ -25,7 +25,7 @@
 
       <ion-item>
         <ion-label position="fixed">条码<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input name="barCode" maxlength=10 required placeholder="输入商品条码" [(ngModel)]="product.barcode" #barCode="ngModel" pattern= "^[0-9]\d*(\.\d+)?$"></ion-input>
+        <ion-input name="barCode" maxlength=20 required placeholder="输入商品条码" [(ngModel)]="product.barcode" #barCode="ngModel" pattern= "^[0-9]\d*(\.\d+)?$"></ion-input>
         <div slot="end" (click)="onScan()" >
           <ion-icon name="scan-outline" style="font-size: 30px;"></ion-icon>
         </div>
@@ -59,7 +59,7 @@
         <p [hidden]="!price.errors?.pattern" style="text-align: center;">售价不能为负数</p>
       </ion-text>
       <ion-item>
-        <ion-label position="fixed" >进价</ion-label>
+        <ion-label position="fixed" >进价<ion-text color="danger">*</ion-text></ion-label>
         <ion-input name="purchasePrice" placeholder="输入商品进价" type="number" [(ngModel)]="product.purchasePrice" #purchasePrice="ngModel" pattern= "^[0-9]\d*(\.\d+)?$">
         </ion-input>
       </ion-item>
@@ -67,7 +67,7 @@
         <p [hidden]="!purchasePrice.errors?.pattern" style="text-align: center;">进价不能为负数</p>
       </ion-text>
       <ion-item>
-        <ion-label position="fixed" >库存</ion-label>
+        <ion-label position="fixed" >库存<ion-text color="danger">*</ion-text></ion-label>
         <ion-input name="inventory" placeholder="输入商品库存" type="number" [(ngModel)]="product.inventory" #inventory="ngModel"  pattern= "^[0-9]\d*(\.\d+)?$"></ion-input>
       </ion-item>
       <ion-text color="danger" *ngIf="inventory.invalid && inventory.touched">

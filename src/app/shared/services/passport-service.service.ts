@@ -21,7 +21,7 @@ export class PassportServiceService {
         }); // 账号或密码错误
     }
 
-    const loginTime = new Date(+new Date() + 6 * 3600 * 1000).getTime();
+    const loginTime = new Date(+new Date() + 5 * 60 * 1000).getTime();
     const Tloginlog = {
       identifier: account,
       loginTime: new Date(),

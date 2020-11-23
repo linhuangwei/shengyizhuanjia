@@ -24,3 +24,13 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+ion-header ion-toolbar {
+    min-height: 67px !important;
+   
+}
+ion-header ion-buttons{
+    padding-top: 30px;//标题向上留20px
+
+}

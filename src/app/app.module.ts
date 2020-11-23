@@ -9,6 +9,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {LocalStorageService} from './shared/services/local-storage.service';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +27,10 @@ import {LocalStorageService} from './shared/services/local-storage.service';
   providers: [
     StatusBar,
     SplashScreen,
+    BarcodeScanner,
+    ImagePicker,
+    StatusBar,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LocalStorageService
   ],

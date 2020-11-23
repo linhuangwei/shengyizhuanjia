@@ -83,6 +83,18 @@ const routes: Routes = [
     path: 'product-list',
     loadChildren: () => import('./routes/product/product-list/product-list.module').then( m => m.ProductListPageModule)
   },
+  {
+    path: 'product-details/:barcode',
+    loadChildren: () => import('./routes/product/product-details/product-details.module').then( m => m.ProductDetailsPageModule)
+  },
+  {
+    path: 'product-edit',
+    loadChildren: () => import('./routes/product/product-edit/product-edit.module').then( m => m.ProductEditPageModule)
+  },
+  {
+    path: 'inventory/:barcode',
+    loadChildren: () => import('./routes/product/inventory/inventory.module').then( m => m.InventoryPageModule)
+  },
 
 ];
 

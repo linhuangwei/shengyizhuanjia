@@ -36,4 +36,5 @@ export class UserService {
     this.localStorageService.set('UserList', UserList);
     return true;
   }
+
 }

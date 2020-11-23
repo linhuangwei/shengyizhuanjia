@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text="返回" style="font-size: 20px;" detail [routerLink]="['/product-details', product.barcode]">
+      </ion-back-button>
+      <ion-title  style="padding-left: 60px;">修改库存</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button   (click)="seeLog()">出入库记录</ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content non-padding >
+  <ion-toolbar style="padding: 1% 3% 3% 3%;">
+    <ion-segment [(ngModel)]="inOrOut" color="primary">
+      <ion-segment-button value="putInInventory" checked="true">
+        入库
+      </ion-segment-button>
+      <ion-segment-button value="getOutInventory">
+        出库
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <form #modefyInfor="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-label position="fix">{{infor[inOrOut]}}</ion-label>
+        <ion-input type="number" slot="end" placeholder="0.0" [(ngModel)]="num" name="num"
+                   type="number" clearInput="true" style="float:right;" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="fix">备注</ion-label>
+        <ion-input type="text" slot="end" [(ngModel)]="product.remark" name="remark"
+                   clearInput="true" style="float:right;"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div style="float: right;padding: 2% 8% 5%;">
+      <ion-text >当前库存： {{product.inventory}} 件</ion-text>
+    </div>
+  </form>
+  <ion-button expand="full" [disabled]="modefyInfor.invalid" (click)="onClick()">
+    确定
+  </ion-button>
+</ion-content>

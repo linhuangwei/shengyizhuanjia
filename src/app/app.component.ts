@@ -14,9 +14,6 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages: Array<{title: string, url: string, icon: string}>;
   public router: Router;
-  
-
-  
 
 
   constructor(
@@ -25,6 +22,9 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private menuController: MenuController,
   ) {
+
+    this.statusBar.overlaysWebView(true);
+
     this.initializeApp();
     this.appPages = [
       { title: '开店论坛', url: '/home', icon: 'chatbox' },

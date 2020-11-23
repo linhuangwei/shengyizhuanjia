@@ -25,8 +25,8 @@ export class WelcomePage implements OnInit {
     //第一次调用get方法时，'App'这个key不存在，第二个参数会作为默认值返回 
     let appConfig: any = this.localStorageService.get(APP_KEY, {
       isLaunched: false,
-      isLogin:false,
-      version: '1.0.0'
+      isLogin: false,
+      version: '0.5.9'
     });
     if (appConfig.isLogin === false ) {
       this.router.navigateByUrl('login');
